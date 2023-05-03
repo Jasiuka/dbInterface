@@ -1,0 +1,66 @@
+.tab-box__header {
+  font-size: 2.5rem;
+  text-transform: uppercase;
+}
+
+.tab-box__text {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}
+
+.select-element {
+  font-size: 2rem;
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  width: 22rem;
+}
+
+.form__btn {
+  background-color: #34495e;
+  padding: 0.5rem 1rem;
+  color: #f5f5f5;
+  font-size: 2rem;
+  border: none;
+  width: 15rem;
+  margin-left: 1rem;
+  border-radius: 4px;
+}
+
+.form__btn:hover {
+  background-color: #405972;
+  transition: 0.5s all;
+  cursor: pointer;
+}
+
+.big-box,
+.tab-box {
+  width: 97%;
+  /* opacity: 0; */
+  /* pointer-events: none; */
+  position: absolute;
+  top: 15%;
+  left: 2rem;
+}
+
+.duomenu-pridejimas__inputai-box div {
+  margin-bottom: 0.5rem;
+}
+
+.input__box input {
+  font-size: 2rem;
+}
+
+.input__box label {
+  font-size: 2rem;
+  margin-left: 0.3rem;
+}
+
+.hide {
+  visibility: hidden;
+  pointer-events: none;
+  display: none;
+}
+
+.menu__btn-open {
+  transform: translateY(1rem);
+}

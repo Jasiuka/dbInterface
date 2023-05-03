@@ -1,0 +1,8 @@
+.duomenu-istrinimas input:checked ~ .duomenu-istrinimas-main {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.duomenu-istrinimas input:checked ~ .duomenu-istrinimas__btn {
+  transform: translateY(1rem);
+}

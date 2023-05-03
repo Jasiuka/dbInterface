@@ -1,0 +1,63 @@
+/* Main color: #34495E (Dark slate gray)
+Accent color: #1ABC9C (Turquoise)
+background-color: #f5f5f5;
+*/
+
+/* BASE */
+
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600&display=swap");
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+  font-family: "Rubik";
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+body {
+  padding-top: 0.2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  background-color: #f5f5f5;
+  position: relative;
+  height: 100vh;
+  font-family: "Rubik";
+}
+
+/* MAIN TABS */
+
+.main-tabs {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  gap: 1rem;
+  list-style: none;
+}
+
+.menu__btn:visited,
+.menu__btn:link {
+  font-size: 3rem;
+  text-transform: uppercase;
+  background-color: #34495e;
+  padding: 2rem 3.5rem;
+  cursor: pointer;
+  border-radius: 5px;
+  color: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s all;
+  text-decoration: none;
+}
+
+.menu__btn:hover {
+  background-color: #405972;
+  transform: translateY(1rem);
+}

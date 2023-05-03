@@ -1,0 +1,30 @@
+.duomenu-perziurejimas-main table {
+  font-size: 1.5rem;
+  border-spacing: 0.5rem;
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 2rem;
+}
+
+.table-darbuotojai td,
+.table-orouostai td,
+.table-pilotai td,
+.table-keleiviai td,
+.table-lektuvai td,
+.table-skrydziai td,
+.table-bilietai td {
+  text-align: center;
+  width: fit-content;
+  padding: 1rem;
+}
+
+.table-darbuotojai tr:nth-child(even),
+.table-orouostai tr:nth-child(even),
+.table-pilotai tr:nth-child(even),
+.table-keleiviai tr:nth-child(even),
+.table-lektuvai tr:nth-child(even),
+.table-skrydziai tr:nth-child(even),
+.table-bilietai tr:nth-child(even) {
+  background-color: #34495e;
+  color: #f5f5f5;
+}

@@ -1,0 +1,17 @@
+.duomenu-pridejimas input:checked ~ .duomenu-pridejimas-main {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.duomenu-pridejimas input:checked ~ .duomenu-pridejimas__btn {
+  transform: translateY(1rem);
+}
+
+.form-prideti__btn {
+  margin-top: 1.5rem;
+  margin-left: 0 !important;
+}
+
+.select-element__pridejimas {
+  margin-bottom: 1rem;
+}
