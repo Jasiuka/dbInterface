@@ -54,3 +54,36 @@
 .delete-btn:hover {
   background-color: #405972;
 }
+
+.perziureti-box {
+  display: flex;
+  align-items: center;
+}
+
+.perziureti-forma {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.paieska-box {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.paieskos-input-box {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.paieskos-input-box input {
+  font-size: 2rem;
+}
+
+.paieskos-input-box label {
+  font-size: 1.6rem;
+  position: absolute;
+  top: -2rem;
+}

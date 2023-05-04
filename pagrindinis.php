@@ -25,11 +25,6 @@
           >Pridėti</a
         >
       </li>
-      <li>
-        <a class="menu__btn" href="http://localhost/Savarankiskas/istrinti.php"
-          >Ištrinti</a
-        >
-      </li>
     </ul>
   </body>
 </html>

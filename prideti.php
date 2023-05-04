@@ -24,11 +24,6 @@
           >Pridėti</a
         >
       </li>
-      <li>
-        <a class="menu__btn" href="http://localhost/Savarankiskas/istrinti.php"
-          >Ištrinti</a
-        >
-      </li>
     </ul>
           <div class="duomenu-pridejimas-main tab-box">
             <h2 class="tab-box__header">Duomenų Pridėjimas</h2>

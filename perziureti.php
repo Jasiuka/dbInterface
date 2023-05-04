@@ -7,7 +7,7 @@
     <link href="styles/bendri_style.css" rel="stylesheet"/>
     <link href="styles/perziureti_style.css" rel="stylesheet"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="delete_script.js"></script>
+    <script src="find_delete_script.js"></script>
     <title>Duomenų bazės valdymas</title>
 </head>
 <body>
@@ -24,26 +24,106 @@
           >Pridėti</a
         >
       </li>
-      <li>
-        <a class="menu__btn" href="http://localhost/Savarankiskas/istrinti.php"
-          >Ištrinti</a
-        >
-      </li>
     </ul>
 <div class="duomenu-perziurejimas-main tab-box">
-          <h2 class="tab-box__header">Duomenų peržiūrėjimas</h2>
-          <p class="tab-box__text">Pasirinkitę lentelę kurios duomenis norite peržiūrėti</p>
-          <form method="post" id="forma" action="perziureti.php">
-            <select name="lentele" class="select-element">
-              <option value="darbuotojai">Darbuotojai</option>
-              <option value="pilotai">Pilotai</option>
-              <option value="bilietai">Bilietai</option>
-              <option value="lektuvai">Lektuvai</option>
-              <option value="orouostai">Oro Uostai</option>
-              <option value="keleiviai">Keleiviai</option>
-              <option value="skrydziai">Skrydžiai</option>
-            </select>
-            <button type="submit" class="form__btn form-perziureti__btn">Peržiūrėti</button>
+          <h2 class="tab-box__header">Duomenų peržiūrėjimas, paieška ir ištrinimas</h2>
+          <p class="tab-box__text">Pasirinkitę lentelę kurios duomenis norite peržiūrėti, ištrinti ar surasti.</p>
+          <form method="post" id="forma" class="perziureti-forma" action="perziureti.php">
+            <div class="perziureti-box">
+              <select name="lentele" class="select-element select-element-perziureti" >
+                <option value="none">Pasirinkite lentelę</option>
+                <option value="darbuotojai">Darbuotojai</option>
+                <option value="pilotai">Pilotai</option>
+                <option value="bilietai">Bilietai</option>
+                <option value="lektuvai">Lektuvai</option>
+                <option value="orouostai">Oro Uostai</option>
+                <option value="keleiviai">Keleiviai</option>
+                <option value="skrydziai">Skrydžiai</option>
+              </select>
+              <button type="submit" class="form__btn form-perziureti__btn">Peržiūrėti</button>
+            </div>
+            <div class="paieska-box hide">
+              <select class="select-element paieska-select-darbuotojai paieska-select hide" name="paieska-darbuotojai">
+                <option class="paieskos-input-option" data-type="none" value="none">Pasirinkite stulpelį</option>
+                <option class="paieskos-input-option" data-type="number" value="DarbuotojoKodas">Darbuotojo kodas</option>
+                <option class="paieskos-input-option" data-type="text" value="Vardas">Darbuotojo vardas</option>
+                <option class="paieskos-input-option" data-type="text" value="Pavarde">Darbuotojo pavardė</option>
+                <option class="paieskos-input-option" data-type="date" value="GimimoData">Darbuotojo gimimo data</option>
+                <option class="paieskos-input-option" data-type="text" value="Pareigos">Darbuotojo pareigos</option>
+                <option class="paieskos-input-option" data-type="text" value="DarboVieta">Darbuotojo darbo vieta</option>
+                
+              </select>
+
+              <select class="select-element paieska-select-pilotai paieska-select hide" name="paieska-pilotai">
+                <option class="paieskos-input-option" data-type="none" value="none">Pasirinkite stulpelį</option>
+                <option class="paieskos-input-option" data-type="number" value="PilotoKodas">Piloto kodas</option>
+                <option class="paieskos-input-option" data-type="text" value="Vardas">Piloto vardas</option>
+                <option class="paieskos-input-option" data-type="text" value="Pavarde">Piloto pavardė</option>
+                <option class="paieskos-input-option" data-type="text" value="Laipsnis">Piloto laipsnis</option>
+                <option class="paieskos-input-option" data-type="number" value="Stazas">Piloto stažas</option>
+                <option class="paieskos-input-option" data-type="text" value="LicenzijosTipas">Piloto licenzijos tipas</option>
+              </select>
+
+              <select class="select-element paieska-select-lektuvai paieska-select hide" name="paieska-lektuvai">
+                <option class="paieskos-input-option" data-type="none" value="none">Pasirinkite stulpelį</option>
+                <option class="paieskos-input-option" data-type="number" value="LektuvoKodas">Lektuvo kodas</option> data-type="text"
+                <option class="paieskos-input-option" data-type="text" value="Modelis">Lektuvo modelis</option>
+                <option class="paieskos-input-option" data-type="text" value="Gamintojas">Lektuvo gamintojas</option>
+                <option class="paieskos-input-option" data-type="date"value="PagaminimoMetai">Lektuvo pagaminimo metai</option>
+                <option class="paieskos-input-option" data-type="number" value="DabartineLokacija">Lektuvo dabartine lokacija</option>
+                <option class="paieskos-input-option" data-type="number" value="VietuSkaicius">Lektuvo vietos</option>
+                <option class="paieskos-input-option" data-type="number" value="SkrydzioAtstumas">Lektuvo skrydžio atstumas</option>
+                <option class="paieskos-input-option" data-type="text" value="Statusas">Lektuvo statusas</option>
+                <option class="paieskos-input-option" data-type="date" value="SekantiApziura">Lektuvo sekanti apžiūra</option>
+              </select>
+
+              <select class="select-element paieska-select-bilietai paieska-select hide" name="paieska-bilietai">
+                <option class="paieskos-input-option" data-type="none" value="none">Pasirinkite stulpelį</option>
+                <option class="paieskos-input-option" data-type="number" value="BilietoNumeris">Bilieto numeris</option>
+                <option class="paieskos-input-option" data-type="number" value="Skrydis">Bilieto skrydžio numeris</option>
+                <option class="paieskos-input-option" data-type="number" value="Kaina">Bilieto kaina</option>
+                <option class="paieskos-input-option" data-type="text" value="VietaLektuve">Bilieto vieta lektuve</option>
+                <option class="paieskos-input-option" data-type="number" value="Keleivis">Bilieto keleivis</option>
+              </select>
+
+              <select class="select-element paieska-select-orouostai paieska-select hide" name="paieska-orouostai">
+                <option class="paieskos-input-option" data-type="none" value="none">Pasirinkite stulpelį</option>
+                <option class="paieskos-input-option" data-type="number" value="OroUostoKodas">Oro uosto kodas</option>
+                <option class="paieskos-input-option" data-type="text" value="Valstybe">Oro uosto valstybė</option>
+                <option class="paieskos-input-option" data-type="text" value="Miestas">Oro uosto miestas</option>
+                <option class="paieskos-input-option" data-type="text" value="KodasIATA">Oro uosto IATA</option>
+                <option class="paieskos-input-option" data-type="text" value="KodasICAO">Oro uosto ICAO</option>
+                <option class="paieskos-input-option" data-type="number" value="PlatumosKoordinates">Oro uosto platumos koordinatės</option>
+                <option class="paieskos-input-option" data-type="number" value="IlgumosKoordinates">Oro uosto ilgumos koordinatės</option>
+              </select>
+
+              <select class="select-element paieska-select-keleiviai paieska-select hide" name="paieska-keleiviai">
+                <option class="paieskos-input-option" data-type="none" value="none">Pasirinkite stulpelį</option>
+                <option class="paieskos-input-option" data-type="number" value="KeleivioKodas">Keleivio kodas</option>
+                <option class="paieskos-input-option" data-type="text" value="Vardas">Keleivio vardas</option>
+                <option class="paieskos-input-option" data-type="text" value="Pavarde">Keleivio pavardė</option>
+              </select>
+
+              <select class="select-element paieska-select-skrydziai paieska-select hide" name="paieska-skrydziai">
+                <option class="paieskos-input-option" data-type="none" value="none">Pasirinkite stulpelį</option>
+                <option class="paieskos-input-option" data-type="number" value="SkrydzioNumeris">Skrydžio numeris</option>
+                <option class="paieskos-input-option" data-type="number" value="Lektuvas">Skrydžio lektuvas</option>
+                <option class="paieskos-input-option" data-type="number" value="LaisvosVietos">Skrydžio laisvos vietos</option>
+                <option class="paieskos-input-option" data-type="number" value="PakilimoLaikas">Skrydžio pakilimo laikas</option>
+                <option class="paieskos-input-option" data-type="date" value="PakilimoData">Skrydžio pakilimo data</option>
+                <option class="paieskos-input-option" data-type="number" value="NusileidimoLaikas">Skrydžio nusileidimo laikas</option>
+                <option class="paieskos-input-option" data-type="date" value="NusileidimoData">Skrydžio nusileidimo data</option>
+                <option class="paieskos-input-option" data-type="number" value="PilotasKapitonas">Skrydžio kapitonas</option>
+                <option class="paieskos-input-option" data-type="number" value="PilotasPagalbinis">Skrydžio pagalbinis</option>
+                <option class="paieskos-input-option" data-type="number" value="PakilimoOroUostas">Skrydžio pakilimo oro uostas</option>
+                <option class="paieskos-input-option" data-type="number" value="NusileidimoOroUostas">Skrydžio nusileidimo oro uostas</option>
+              </select>
+              <div class="paieskos-input-box">
+                <label for="paieskos-input">Paieškos kriterijus</label>
+                <input name="paieskos-input" type="text" class="paieska-input" />
+              </div>
+              <button class="form__btn paieska-btn" type="button">Ieškoti</button>
+            </div>
           </form>
           <?php
             if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['lentele'])) {
