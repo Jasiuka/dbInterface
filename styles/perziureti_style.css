@@ -28,3 +28,29 @@
   background-color: #34495e;
   color: #f5f5f5;
 }
+
+.trash-icon {
+  width: 3rem;
+  height: 3rem;
+  padding: 0.5rem;
+}
+
+.table-darbuotojai .trash-icon:nth-child(even) {
+  stroke: black;
+}
+
+.delete-btn {
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.delete-btn:hover {
+  background-color: #405972;
+}

@@ -1,37 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="styles/istrinti_style.css" rel="stylesheet">
-    <link href="styles/bendri_style.css" rel="stylesheet">
-    <link href="styles/base_style.css" rel="stylesheet">
-    <title>Duomenų bazės valdymas</title>
-</head>
-<body>
-<ul class="main-tabs">
-      <li>
-        <a
-          class="menu__btn"
-          href="http://localhost/Savarankiskas/perziureti.php"
-          >Peržiūrėti</a
-        >
-      </li>
-      <li>
-        <a class="menu__btn" href="http://localhost/Savarankiskas/prideti.php"
-          >Pridėti</a
-        >
-      </li>
-      <li>
-        <a class="menu__btn menu__btn-open" href="http://localhost/Savarankiskas/istrinti.php"
-          >Ištrinti</a
-        >
-      </li>
-    </ul>
-<div class="duomenu-istrinimas-main tab-box">
-            <h2 class="tab-box__header">Duomenų ištrinimas</h2>
-            <p class="tab-box__text">Pasirinkitę lentelę į kurią norite pridėti duomenų</p>
-          </div>
-</body>
-</html>
+<?php 
+$Sent_ID = $_POST['id'];
+$Table_Name = $_POST['table'];
+
+if ($Table_Name == "darbuotojai") {
+  $sql = "DELETE FROM $Table_Name WHERE DarbuotojoKodas = $Sent_ID";
+}
+
+if ($Table_Name == "pilotai") {
+  $sql = "DELETE FROM $Table_Name WHERE PilotoKodas = $Sent_ID";
+}
+
+if ($Table_Name == "lektuvai") {
+  $sql = "DELETE FROM $Table_Name WHERE LektuvoKodas = $Sent_ID";
+}
+
+if ($Table_Name == "keleiviai") {
+  $sql = "DELETE FROM $Table_Name WHERE KeleivioKodas = $Sent_ID";
+}
+
+if ($Table_Name == "orouostai") {
+  $sql = "DELETE FROM $Table_Name WHERE OroUostoKodas = $Sent_ID";
+}
+
+if ($Table_Name == "bilietai") {
+  $sql = "DELETE FROM $Table_Name WHERE BilietoNumeris = $Sent_ID";
+}
+
+if ($Table_Name == "skrydziai") {
+  $sql = "DELETE FROM $Table_Name WHERE SkrydzioNumeris = $Sent_ID";
+}
+
+
+// connect to DB
+$host = "localhost";
+$user = "root";
+$password = "";
+$database = "aviakompanija";
+$conn = mysqli_connect($host, $user, $password, $database);
+if (!$conn) {
+  die("Connection failed: " . mysqli_connect_error());
+}
+
+if ($conn->query($sql) === TRUE) {
+  echo "Data was deleted successfuly";
+} else {
+  echo "Error: " . $sql . "<br>" . $conn->error;
+}
+
+// Close the database connection
+$conn->close();
+
+?>

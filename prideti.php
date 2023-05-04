@@ -33,7 +33,7 @@
           <div class="duomenu-pridejimas-main tab-box">
             <h2 class="tab-box__header">Duomenų Pridėjimas</h2>
             <p class="tab-box__text">Pasirinkitę lentelę į kurią norite pridėti duomenų</p>
-            <form id="prideti-forma" method="post" action="prideti.php">
+            <form id="prideti-forma" method="post" action="prideti_submit.php">
             <select name="lentele-prideti" class="select-element select-element__pridejimas">
               <option value="none" >Pasirinkite lentelę</option>
               <option value="darbuotojai">Darbuotojai</option>
@@ -248,87 +248,7 @@
                 </div>
               </div>
               <input type="submit" value="Pridėti" class="form__btn form-prideti__btn hide"/>
-            </form>
-            <?php
-            if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['lentele-prideti'])) {
-              // connect to DB
-              $host = "localhost";
-              $user = "root";
-              $password = "";
-              $database = "aviakompanija";
-              $conn = mysqli_connect($host, $user, $password, $database);
-              if (!$conn) {
-                die("Connection failed: " . mysqli_connect_error());
-              }
-            
-            $ChosenTable = $_POST['lentele-prideti'];
-            if ($ChosenTable == "darbuotojai") {
-              $Darbuotojo_kodas = $_POST['darbuotojo-kodas'];
-              $Darbuotojo_vardas = $_POST['darbuotojo-vardas'];
-              $Darbuotojo_pavarde = $_POST['darbuotojo-pavarde'];
-              $Darbuotojo_gimimo_data = $_POST['darbuotojo-gimimo-data'];
-              $Darbuotojo_pareigos = $_POST['darbuotojo-pareigos'];
-              $Darbuotojo_vieta = $_POST['darbuotojo-vieta'];
-
-              $sql = "INSERT INTO darbuotojai (DarbuotojoKodas, Vardas, Pavarde, GimimoData, Pareigos, DarboVieta) VALUES ('$Darbuotojo_kodas','$Darbuotojo_vardas','$Darbuotojo_pavarde','$Darbuotojo_gimimo_data','$Darbuotojo_pareigos','$Darbuotojo_vieta')" ;
-            }
-            if ($ChosenTable == "pilotai") {
-                $Piloto_kodas = $_POST['piloto-kodas'];
-                $Piloto_vardas = $_POST['piloto-vardas'];
-                $Piloto_pavarde = $_POST['piloto-pavarde'];
-                $Piloto_laipsnis = $_POST['piloto-laipsnis'];
-                $Piloto_stazas = $_POST['piloto-stazas'];
-                $Piloto_licenzija = $_POST['piloto-licenzija'];
-  
-                $sql = "INSERT INTO pilotai (PilotoKodas, Vardas, Pavarde, Laipsnis, Stazas, LicenzijosTipas) VALUES ('$Piloto_kodas','$Piloto_vardas','$Piloto_pavarde','$Piloto_laipsnis','$Piloto_stazas','$Piloto_licenzija')" ;
-              }
-              if ($ChosenTable == "bilietai") {
-                $Bilieto_numeris = $_POST['bilieto-numeris'];
-                $Bilieto_skrydis = $_POST['bilieto-skrydis'];
-                $Bilieto_kaina = $_POST['bilieto-kaina'];
-                $Bilieto_vieta = $_POST['bilieto-vieta'];
-                $Bilieto_keleivis = $_POST['bilieto-keleivis'];
-  
-                $sql = "INSERT INTO bilietai (BilietoNumeris, Skrydis, Kaina, VietaLektuve, Keleivis) VALUES ('$Bilieto_numeris','$Bilieto_skryids','$Bilieto_kaina','$Bilieto_vieta','$Bilieto_keleivis')" ;
-              }
-              if ($ChosenTable == "lektuvai") {
-                $Lektuvo_kodas = $_POST['lektuvo-kodas'];
-                $Lektuvo_modelis = $_POST['lektuvo-modelis'];
-                $Lektuvo_gamintojas = $_POST['lektuvo-gamintojas'];
-                $Lektuvo_metai = $_POST['lektuvo-metai'];
-                $Lektuvo_lokacija = $_POST['lektuvo-lokacija'];
-                $Lektuvo_vietos = $_POST['lektuvo-vietos'];
-                $Lektuvo_atstumas = $_POST['lektuvo-atstumas'];
-                $Lektuvo_statusas = $_POST['lektuvo-statusas'];
-                $Lektuvo_apziura = $_POST['lektuvo-apziura'];
-  
-                $sql = "INSERT INTO lektuvai (LektuvoKodas, Modelis, Gamintojas, PagaminimoMetai, DabartineLokacija, VietuSkaicius, SkrydzioAtstumas, Statusas, SekantiApziura) VALUES ('$Lektuvo_kodas','$Lektuvo_modelis','$Lektuvo_gamintojas','$Lektuvo_metai','$Lektuvo_lokacija','$Lektuvo_vietos','$Lektuvo_atstumas','$Lektuvo_statusas','$Lektuvo_apziura')" ;
-              }
-              if ($ChosenTable == "orouostai") {
-                $Orouosto_kodas = $_POST['orouosto-kodas'];
-                $Orouosto_valstybe = $_POST['orouosto-valstybe'];
-                $Orouosto_miestas = $_POST['orouosto-miestas'];
-                $Orouosto_iata = $_POST['orouosto-iata'];
-                $Orouosto_icao = $_POST['orouosto-icao'];
-                $Orouosto_platuma = $_POST['orouosto-platuma'];
-                $Orouosto_ilguma = $_POST['orouosto-ilguma'];
-  
-                $sql = "INSERT INTO orouostai (OroUostoKodas, Valstybe, Miestas, KodasIATA, KodasICAO, PlatumosKoordinates, IlgumosKoordinates) VALUES ('$Orouosto_kodas','$Orouosto_valstybe','$Orouosto_miestas','$Orouosto_iata','$Orouosto_icao','$Orouosto_platuma','$Orouosto_ilguma')" ;
-              }
-
-            if ($conn->query($sql) === TRUE) {
-              echo "New client added successfully!";
-          } else {
-              echo "Error: " . $sql . "<br>" . $conn->error;
-          }
-          
-          // Close the database connection
-          $conn->close();
-        }
-            
-               ?>
-            
-            
+            </form>      
             </div>
           </div>
 </body>

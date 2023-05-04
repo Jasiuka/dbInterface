@@ -8,6 +8,8 @@ document.addEventListener("DOMContentLoaded", function () {
     ".duomenu-pridejimas__inputai-box"
   );
 
+  const deleteButtons = document.querySelectorAll(".delete-btn");
+
   pridejimas_select.addEventListener("change", (e) => {
     const value = e.target.value;
 
@@ -38,6 +40,16 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  // DELETE FUNCTIONALITY
+  deleteButtons.forEach((button) =>
+    button.addEventListener("click", () => {
+      const id = button.getAttribute("data-id");
+      console.log(id);
+      console.log("hello");
+    })
+  );
+
+  // FUNCTIONS
   function showInputs(inputName, allInputsBoxes) {
     allInputsBoxes.forEach((element) => {
       if (element.classList.contains(`duomenu-pridejimas__${inputName}`)) {
