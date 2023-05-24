@@ -7,7 +7,7 @@
     <link href="styles/prideti_style.css" rel="stylesheet">
     <link href="styles/bendri_style.css" rel="stylesheet">
     <link href="styles/base_style.css" rel="stylesheet">
-    <script src="script.js"></script>
+    <script src="add_script.js"></script>
     <title>Duomenų bazės valdymas</title>
 </head>
 <body>
@@ -38,7 +38,13 @@
               <option value="orouostai">Oro Uostai</option>
               <option value="keleiviai">Keleiviai</option>
               <option value="skrydziai">Skrydžiai</option>
+              <option value="reisai">Reisai</option>
+              <option value="bagazai">Bagažai</option>
+              <option value="registracijos">Registracijos</option>
             </select>
+               <!-- -------------------------------------------------------------------------------- -->
+              <!-- ---------------------------------Darbuotojai-------------------------------------------- -->
+              <!-- -------------------------------------------------------------------------------- -->
             <div class="duomenu-pridejimas__inputai">
               <div class="duomenu-pridejimas__inputai-box duomenu-pridejimas__darbuotojai hide">
                 <div class="darbuotojo-kodas__box input__box ">
@@ -66,6 +72,9 @@
                   <label class="pridejimas__label" for="darbuotojo-vieta__input">Darbuotojo darbo vieta</label>
                 </div>
               </div>
+                <!-- -------------------------------------------------------------------------------- -->
+              <!-- ---------------------------------Pilotai-------------------------------------------- -->
+              <!-- -------------------------------------------------------------------------------- -->
               <div class="duomenu-pridejimas__inputai-box duomenu-pridejimas__pilotai hide">
                 <div class="piloto-kodas__box input__box">
                 <input type="number" id="piloto-kodas__input" name="piloto-kodas" />
@@ -92,6 +101,9 @@
                   <label class="pridejimas__label" for="piloto-stazas__input">Piloto stažas</label>
                 </div>
               </div>
+                <!-- -------------------------------------------------------------------------------- -->
+              <!-- ---------------------------------Bilietai-------------------------------------------- -->
+              <!-- -------------------------------------------------------------------------------- -->
               <div class="duomenu-pridejimas__inputai-box duomenu-pridejimas__bilietai hide">
                 <div class="bilieto-numeris__box input__box">
                 <input type="number" id="bilieto-numeris__input" name="bilieto-numeris" />
@@ -114,6 +126,9 @@
                   <label class="pridejimas__label" for="bilieto-keleivis__input">Bilieto keleivis</label>
                 </div>
               </div>
+                <!-- -------------------------------------------------------------------------------- -->
+              <!-- ---------------------------------Lektuvai-------------------------------------------- -->
+              <!-- -------------------------------------------------------------------------------- -->
               <div class="duomenu-pridejimas__inputai-box duomenu-pridejimas__lektuvai hide">
                 <div class="lektuvo-kodas__box input__box">
                 <input type="number" id="lektuvo-kodas__input" name="lektuvo-kodas" />
@@ -152,6 +167,9 @@
                   <label class="pridejimas__label" for="lektuvo-apziura__input">Lektuvo kita apžiūra</label>
                 </div>
               </div>
+                <!-- -------------------------------------------------------------------------------- -->
+              <!-- ---------------------------------Oro Uostai-------------------------------------------- -->
+              <!-- -------------------------------------------------------------------------------- -->
               <div class="duomenu-pridejimas__inputai-box duomenu-pridejimas__orouostai hide">
                 <div class="orouosto-kodas__box input__box">
                 <input type="number" id="orouosto-kodas__input" name="orouostai-kodas" />
@@ -182,6 +200,9 @@
                   <label class="pridejimas__label" for="orouosto-ilguma__input">Oro uosto ilgumos koordinatės</label>
                 </div>
               </div>
+               <!-- -------------------------------------------------------------------------------- -->
+              <!-- ---------------------------------Keleiviai-------------------------------------------- -->
+              <!-- -------------------------------------------------------------------------------- -->
               <div class="duomenu-pridejimas__inputai-box duomenu-pridejimas__keleiviai hide">
                 <div class="keleivio-kodas__box input__box">
                 <input type="number" id="keleivio-kodas__input" name="keleivio-kodas" />
@@ -195,7 +216,22 @@
                 <input type="text" id="keleivio-pavarde__input" name="keleivio-pavarde" />
                   <label class="pridejimas__label" for="keleivio-pavarde__input">Keleivio pavardė</label>
                 </div>
+                <div class="keleivio-pastas__box input__box">
+                <input type="email" id="keleivio-pastas__input" name="keleivio-pastas" />
+                  <label class="pridejimas__label" for="keleivio-pastas__input">Keleivio El paštas</label>
+                </div>
+                <div class="keleivio-bagazas__box input__box">
+                <input type="number" id="keleivio-bagazas__input" name="keleivio-bagazas" />
+                  <label class="pridejimas__label" for="keleivio-bagazas__input">Keleivio bagažo numeris</label>
+                </div>
+                <div class="keleivio-registracija__box input__box">
+                <input type="number" id="keleivio-registracija__input" name="keleivio-registracija" />
+                  <label class="pridejimas__label" for="keleivio-registracija__input">Keleivio registracijos numeris</label>
+                </div>
               </div>
+              <!-- -------------------------------------------------------------------------------- -->
+              <!-- ---------------------------------Skrydžiai-------------------------------------------- -->
+              <!-- -------------------------------------------------------------------------------- -->
               <div class="duomenu-pridejimas__inputai-box duomenu-pridejimas__skrydziai hide">
                 <div class="skrydzio-numeris__box input__box" name="skrydzio-numeris">
                 <input type="number" id="skrydzio-numeris__input" />
@@ -205,21 +241,17 @@
                 <input type="number" id="skrydzio-lektuvas__input" name="skrydzio-lektuvas" />
                   <label class="pridejimas__label" for="skrydzio-lektuvas__input">Skrydžio lektuvas</label>
                 </div>
+                <div class="skrydzio-reisas__box input__box">
+                <input type="number" id="skrydzio-reisas__input" name="skrydzio-reisas" />
+                  <label class="pridejimas__label" for="skrydzio-reisas__input">Skrydžio reiso numeris</label>
+                </div>
                 <div class="skrydzio-vietos__box input__box">
                 <input type="number" id="skrydzio-vietos__input" name="skrydzio-vietos" />
                   <label class="pridejimas__label" for="skrydzio-vietos__input">Skrydžio vietos</label>
                 </div>
-                <div class="skrydzio-pakilimo-laikas__box input__box">
-                <input type="number" id="skrydzio-pakilimo-laikas__input" name="skrydzio-pakilimo-laikas" />
-                  <label class="pridejimas__label" for="skrydzio-pakilimo-laikas__input">Skrydžio pakilimo laikas</label>
-                </div>
                 <div class="skrydzio-pakilimo-data__box input__box">
                 <input type="date" id="skrydzio-pakilimo-data__input" name="skrydzio-pakilimo-data" />
                   <label class="pridejimas__label" for="skrydzio-pakilimo-data__input">Skrydžio pakilimo data</label>
-                </div>
-                <div class="skrydzio-nusileidimo-laikas__box input__box">
-                <input type="number" id="skrydzio-nusileidimo-laikas__input" name="skrydzio-nusileidimo-laikas" />
-                  <label class="pridejimas__label" for="skrydzio-nusileidimo-laikas__input">Skrydžio nusileidimo laikas</label>
                 </div>
                 <div class="skrydzio-nusileidimo-data__box input__box">
                 <input type="date" id="skrydzio-nusileidimo-data__input" name="skrydzio-nusileidimo-data" />
@@ -233,13 +265,84 @@
                 <input type="number" id="skrydzio-pagalbinis__input" name="skrydzio-pagalbinis" />
                   <label class="pridejimas__label" for="skrydzio-pagalbinis__input">Skrydžio pagalbinis pilotas</label>
                 </div>
-                <div class="skrydzio-pakilimo-orouostas__box input__box">
-                <input type="number" id="skrydzio-pakilimo-orouostas__input" name="skrydzio-pakilimo-orouostas" />
-                  <label class="pridejimas__label" for="skrydzio-pakilimo-orouostas__input">Skrydžio pakilimo oro uostas</label>
+              </div>
+              <!-- ------------------------------------------------------------------------------------------- -->
+              <!-- -----------------------------------Bagažai-------------------------------------------------- -->
+              <!-- ------------------------------------------------------------------------------------------- -->
+              <div class="duomenu-pridejimas__inputai-box duomenu-pridejimas__bagazai hide">
+                <div class="bagazo-numeris__box input__box" name="bagazo-numeris">
+                <input type="number" id="bagazo-numeris__input" />
+                  <label class="pridejimas__label" for="bagazo-numeris__input">Bagažo kodas</label>
                 </div>
-                <div class="skrydzio-nusileidimo-orouostas__box input__box">
-                <input type="number" id="skrydzio-nusileidimo-orouostas__input" name="skrydzio-nusileidimo-orouostas" />
-                  <label class="pridejimas__label" for="skrydzio-nusileidimo-orouostas__input">Skrydžio nusileidimo oro uostas</label>
+                <div class="bagazo-svoris__box input__box">
+                <input type="number" id="bagazo-svoris__input" name="bagazo-svoris" />
+                  <label class="pridejimas__label" for="bagazo-svoris__input">Bagažo svoris</label>
+                </div>
+                <div class="bagazo-skrydis__box input__box">
+                <input type="number" id="bagazo-skrydis__input" name="bagazo-skrydis" />
+                  <label class="pridejimas__label" for="bagazo-skrydis__input">Bagažo skrydis</label>
+                </div>
+              </div>
+              <!-- ------------------------------------------------------------------------------------------- -->
+              <!-- -----------------------------------Registracijos-------------------------------------------------- -->
+              <!-- ------------------------------------------------------------------------------------------- -->
+              <div class="duomenu-pridejimas__inputai-box duomenu-pridejimas__registracijos hide">
+                <div class="registracijos-numeris__box input__box" name="registracijos-numeris">
+                <input type="number" id="registracijos-numeris__input" />
+                  <label class="pridejimas__label" for="registracijos-numeris__input">Registracijos kodas</label>
+                </div>
+                <div class="dokumento-tipas__box input__box">
+                <input type="select" id="dokumento-tipas__input" name="dokumento-tipas" />
+                  <label class="pridejimas__label" for="dokumento-tipas__input">Dokumento tipas</label>
+                </div>
+                <div class="dokumento-numeris__box input__box">
+                <input type="number" id="dokumento-numeris__input" name="dokumento-numeris" />
+                  <label class="pridejimas__label" for="dokumento-numeris__input">Dokumento numeris</label>
+                </div>
+                <div class="asmens-kodas__box input__box">
+                <input type="number" id="asmens-kodas__input" name="asmens-kodas" />
+                  <label class="pridejimas__label" for="asmens-kodas__input">Asmens kodas</label>
+                </div>
+                <div class="registracijos-gimdata__box input__box">
+                <input type="date" id="registracijos-gimdata__input" name="registracijos-gimdata" />
+                  <label class="pridejimas__label" for="registracijos-gimdata__input">Asmens gimimo data</label>
+                </div>
+                <div class="registracijos-isdavimas__box input__box">
+                <input type="text" id="registracijos-isdavimas__input" name="registracijos-isdavimas" />
+                  <label class="pridejimas__label" for="registracijos-isdavimas__input">Valstybė išdavusi dokumentą</label>
+                </div>
+                <div class="registracijos-pilietybe__box input__box">
+                <input type="text" id="registracijos-pilietybe__input" name="registracijos-pilietybe" />
+                  <label class="pridejimas__label" for="registracijos-pilietybe__input">Asmens pilietybė</label>
+                </div>
+              </div>
+              <!-- ------------------------------------------------------------------------------------------- -->
+              <!-- -----------------------------------Reisai-------------------------------------------------- -->
+              <!-- ------------------------------------------------------------------------------------------- -->
+              <div class="duomenu-pridejimas__inputai-box duomenu-pridejimas__reisai hide">
+                <div class="reiso-numeris__box input__box" name="reiso-numeris">
+                <input type="number" id="reiso-numeris__input" />
+                  <label class="pridejimas__label" for="reiso-numeris__input">Reiso numeris</label>
+                </div>
+                <div class="reiso-isvykimo-oro-uostas__box input__box">
+                <input type="number" id="reiso-isvykimo-oro-uostas__input" name="reiso-isvykimo-oro-uostas" />
+                  <label class="pridejimas__label" for="reiso-isvykimo-oro-uostas__input">Reiso išvykimo oro uosto kodas</label>
+                </div>
+                <div class="reiso-atvykimo-oro-uostas__box input__box">
+                <input type="number" id="reiso-atvykimo-oro-uostas__input" name="reiso-atvykimo-oro-uostas" />
+                  <label class="pridejimas__label" for="reiso-atvykimo-oro-uostas__input">Reiso atvykimo oro uosto kodas</label>
+                </div>
+                <div class="reiso-isvykimo-laikas__box input__box">
+                <input type="time" id="reiso-isvykimo-laikas__input" name="reiso-isvykimo-laikas" />
+                  <label class="pridejimas__label" for="reiso-isvykimo-laikas__input">Reiso išvykimo laikas</label>
+                </div>
+                <div class="reiso-atvykimo-laikas__box input__box">
+                <input type="time" id="reiso-atvykimo-laikas__input" name="reiso-atvykimo-laikas" />
+                  <label class="pridejimas__label" for="reiso-atvykimo-laikas__input">Reiso atvykimo laikas</label>
+                </div>
+                <div class="reiso-trukme__box input__box">
+                <input type="number" id="reiso-trukme__input" name="reiso-trukme" />
+                  <label class="pridejimas__label" for="reiso-trukme__input">Reiso trukmė</label>
                 </div>
               </div>
               <input type="submit" value="Pridėti" class="form__btn form-prideti__btn hide"/>

@@ -8,7 +8,7 @@
     <link href="styles/base_style.css" rel="stylesheet" />
     <link href="styles/pagrindinis_style.css" rel="stylesheet" />
     <link href="styles/bendri_style.css" rel="stylesheet" />
-    <script src="script.js"></script>
+    <script src="add_script.js"></script>
     <title>Duomenų bazės valdymas</title>
   </head>
   <body>
@@ -25,6 +25,7 @@
           >Pridėti</a
         >
       </li>
+
     </ul>
   </body>
 </html>

@@ -10,7 +10,7 @@
     $user = "root";
     $password = "";
     $database = "aviakompanija";
-    $conn = mysqli_connect($host, $user, $password, $database);
+    $conn = mysqli_connect($host, $user, $password, $database, 3308);
     if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
     }

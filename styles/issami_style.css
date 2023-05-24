@@ -1,0 +1,9 @@
+.form-issami__btn {
+  transition: all 0.3s;
+}
+
+.issami-input {
+  font-size: 2rem;
+  padding: 0.5rem;
+  margin-left: 0.8rem;
+}

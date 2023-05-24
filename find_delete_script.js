@@ -1,26 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const deleteButtons = document.querySelectorAll(".delete-btn");
   // SEARCH FEATURE VARIABLES
   const selectPerziuretiElement = document.querySelector(
     ".select-element-perziureti"
   );
 
+  const activeTable = document.getElementsByTagName("table");
   const paieskosSelectai = document.querySelectorAll(".paieska-select");
   const paieskosBox = document.querySelector(".paieska-box");
-  const paieskosInputOptions = document.querySelectorAll(
-    ".paieskos-input-option"
-  );
+  let editMode = false;
+
   const paieskosInput = document.querySelector(".paieska-input");
   const paieskaBtn = document.querySelector(".paieska-btn");
-  let column;
-
-  const tbodyDarbuotojai = document.querySelector(".table-darbuotojai-data");
-  const tbodyPilotai = document.querySelector(".table-pilotai-data");
-  const tbodyLektuvai = document.querySelector(".table-lektuvai-data");
-  const tbodyOroUostai = document.querySelector(".table-orouostai-data");
-  const tbodyBilietai = document.querySelector(".table-bilietai-data");
-  const tbodyKeleiviai = document.querySelector(".table-keleiviai-data");
-  const tbodySkrydziai = document.querySelector(".table-skrydziai-data");
 
   // SEARCH FUNCTIONALITY
 
@@ -51,75 +41,286 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  // SEARCH FUNCIONALITY
   paieskaBtn.addEventListener("click", () => {
-    const value = paieskosInput.value;
-    const table = selectPerziuretiElement.value;
-    const chosenColumn = column;
+    const value = paieskosInput.value.toLowerCase().trim();
+    const matchedRows = [];
+    tableBody.innerHTML = "";
 
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", "paieska_func.php");
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.onload = function () {
-      const data = JSON.parse(xhr.responseText);
-      if (data.length > 0) {
-        if (table === "darbuotojai") {
-          tbodyDarbuotojai.innerHTML = "";
-          data.forEach((dataObject) => {
-            const newRow = document.createElement("tr");
-            Object.values(dataObject).forEach((element) => {
-              const newDataElement = document.createElement("td");
-              newDataElement.textContent = element;
-              newRow.appendChild(newDataElement);
-            });
-            const deleteTD = document.createElement("td");
-            const deleteBtnHTML = `
-            <button class="delete-btn" data-id="${
-              Object.values(dataObject)[0]
-            }" data-table="${table}"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#e74c3c" class="trash-icon">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                    </svg>
-                  </button>
-                  `;
-            deleteTD.innerHTML = deleteBtnHTML;
-            newRow.appendChild(deleteTD);
-            tbodyDarbuotojai.appendChild(newRow);
-          });
+    // const activeTable = document.getElementsByTagName("table");
+    const tableBody = activeTable[0].tBodies[0];
+    const rows = [...activeTable[0].rows];
+    rows.forEach((row) => {
+      Array.from(row.cells).forEach((cell) => {
+        if (cell.textContent.toLowerCase().trim().includes(value)) {
+          matchedRows.push(row.outerHTML);
+        } else {
+          return;
         }
-
-        // Display the search results to the user
-        // data.forEach((dataObject) => {
-        //   Object.values(dataObject).forEach((element) => {
-        //     if (tbodyDarbuotojai.classList.toString().includes(table)) {
-        //       const html = `<td>${element}</td>`;
-        //       console.log(html);
-        //     }
-        //   });
-        // });
-      } else {
-        console.log("No results found.");
-      }
-    };
-    xhr.send(
-      "criteria=" + value + "&table=" + table + "&column=" + chosenColumn
-    );
+      });
+    });
+    tableBody.innerHTML = matchedRows.join("");
   });
 
-  // DELETE FUNCTIONALITY
-  deleteButtons.forEach((button) =>
-    button.addEventListener("click", () => {
-      const id = button.getAttribute("data-id");
-      const tableName = button.getAttribute("data-table");
-      console.log(id);
-      console.log(tableName);
+  // DELETE AND EDIT FUNCIONALITY
+  activeTable[0].addEventListener("click", (e) => {
+    const target = e.target;
+
+    // DELETE
+    if (
+      target.classList.contains("trash-icon") ||
+      target.classList.contains("delete-btn")
+    ) {
+      const confirmed = window.confirm("Ar tikrai norite ištrinti?");
+      if (confirmed) {
+        const clickedButton = target.closest("button");
+        const id = clickedButton.getAttribute("data-id");
+        const tableName = clickedButton.getAttribute("data-table");
+
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "istrinti.php");
+        xhr.setRequestHeader(
+          "Content-Type",
+          "application/x-www-form-urlencoded"
+        );
+        xhr.onload = function () {
+          // Refresh the page or update the table with the new data to reflect the deletion
+          location.reload();
+        };
+        xhr.send("id=" + id + "&table=" + tableName);
+      } else {
+        return;
+      }
+    }
+
+    // EDIT
+    if (
+      (target.classList.contains("edit-btn") ||
+        target.classList.contains("edit-icon")) &&
+      !editMode
+    ) {
+      editMode = true;
+
+      const editableRow = target.closest("tr");
+      for (let i = 1; i < Array.from(editableRow.cells).length - 2; i++) {
+        const cell = Array.from(editableRow.cells)[i];
+        const cellValue = Array.from(editableRow.cells)[i].innerHTML;
+        const newInputElement = document.createElement("input");
+        newInputElement.value = cellValue;
+        cell.innerHTML = "";
+        cell.appendChild(newInputElement);
+      }
+      const button = target.closest("button");
+      button.classList.add("edit-mode");
+      button.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3498db" class="edit-icon edit-mode">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+      </svg>
+      `;
+
+      // editMode = false;
+    }
+    // IF Clicked again on edit button --- to save
+    else if (
+      (target.classList.contains("edit-btn") ||
+        target.classList.contains("edit-icon")) &&
+      editMode &&
+      target.classList.contains("edit-mode")
+    ) {
+      const editedRow = target.closest("tr");
+      console.log(editMode);
+
+      // Variables for send request
+      const clickedButton = target.closest("button");
+      const id = clickedButton.getAttribute("data-id");
+      const tableName = clickedButton.getAttribute("data-table");
+      const values = [];
+
+      // loop through row cells and get input values, then push values to array of values and send values and tableName with id of row to php.
+      values.push(id);
+      for (let i = 1; i < Array.from(editedRow.cells).length - 2; i++) {
+        const cell = Array.from(editedRow.cells)[i];
+        const inputValue = cell.querySelector("input").value;
+        values.push(inputValue);
+        cell.innerHTML = inputValue;
+
+        // create an object with the data to be sent
+      }
+
+      const data = {
+        id: id,
+        tableName: tableName,
+        values: values,
+      };
+
+      // send request to php to update database data
+      const xhr = new XMLHttpRequest();
+      xhr.open("POST", "redaguoti.php");
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.onload = function () {
+        if (xhr.status === 200) {
+          // Request succeeded
+          const response = JSON.parse(xhr.responseText);
+          console.log(response);
+          editMode = false;
+        } else {
+          // Request failed
+          console.error("Error: " + xhr.status);
+          editMode = false;
+        }
+      };
+      xhr.send(JSON.stringify(data));
+    }
+    // IF Clicked another edit button when one row is already in edit -- alert
+    else if (
+      (target.classList.contains("edit-btn") ||
+        target.classList.contains("edit-icon")) &&
+      editMode &&
+      !target.classList.contains("edit-mode")
+    ) {
+      console.log(editMode);
+      alert(
+        "Jūs negalite pasirinkti dar vieno lauko redagavimui. Pirmiausia baikite redagavimą pirmojo lauko."
+      );
+    }
+    // DETAILED VIEW
+    if (
+      target.classList.contains("more-btn") ||
+      target.classList.contains("more-icon")
+    ) {
+      const clickedButton = target.closest("button");
+      const id = clickedButton.getAttribute("data-id");
+      const tableName = clickedButton.getAttribute("data-table");
+
+      const data = {
+        tableName: tableName,
+        id: id,
+      };
 
       const xhr = new XMLHttpRequest();
-      xhr.open("POST", "istrinti.php");
-      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      xhr.open("POST", "issami-submit.php");
+      xhr.setRequestHeader("Content-Type", "application/json");
       xhr.onload = function () {
-        // Refresh the page or update the table with the new data to reflect the deletion
-        location.reload();
+        if (xhr.status === 200) {
+          // Request succeeded
+          const response = JSON.parse(xhr.responseText);
+
+          document.querySelector(
+            ".perziureti-daugiau__box--outer"
+          ).style.zIndex = 1;
+          document.querySelector(
+            ".perziureti-daugiau__box--outer"
+          ).style.opacity = 1;
+
+          const boxHeader = document.querySelector(
+            ".perziureti-daugiau__box--header"
+          );
+
+          console.log(response);
+
+          const { LektuvoKodas, Modelis, SkrydzioAtstumas, Statusas } =
+            response[0][0];
+          const {
+            PilotoKodas: kPilotoKodas,
+            Vardas: kVardas,
+            Pavarde: kPavarde,
+          } = response[1][0];
+          const {
+            PilotoKodas: pPilotoKodas,
+            Vardas: pVardas,
+            Pavarde: pPavarde,
+          } = response[2][0];
+          const { ReisoNumeris, IsvykimoLaikas, AtvykimoLaikas, Trukme } =
+            response[3][0];
+          const { PakilimoData, NusileidimoData, LaisvosVietos } =
+            response[4][0];
+
+          const {
+            Miestas: iMiestas,
+            Valstybe: iValstybe,
+            KodasIATA: iKodasIATA,
+          } = response[6][0];
+          const {
+            Miestas: aMiestas,
+            Valstybe: aValstybe,
+            KodasIATA: aKodasIATA,
+          } = response[7][0];
+
+          const { Miestas, Valstybe, KodasIATA } = response[5][0];
+
+          const dataBox = document.querySelector(
+            ".perziureti-daugiau__box--data"
+          );
+          boxHeader.textContent = `Skrydžio numeriu ${id} informacija`;
+          const html = `
+          <div>
+            <div class="left-side">
+          
+              <h2>Skrydis</h2>
+              <br>
+              <h3>Skrydžio numeris: ${id}</h3>
+              <h3>Likusios laisvos vietos: ${LaisvosVietos}</h3>
+             <h3>Pakilimo data: ${PakilimoData}</h3>
+              <h3>Nusileidimo data: ${NusileidimoData}</h3>
+            </div>
+              <br>
+             <br>
+              <div>
+             <h2>Skrydžio pilotai</h2>
+              <br>
+              <h3>Kapitonas: ${kVardas} ${kPavarde}. Piloto kodas: ${kPilotoKodas} </h3>
+              <h3>Pagalbinis pilotas: ${pVardas} ${pPavarde}. Piloto kodas: ${pPilotoKodas} </h3>
+              </div>
+            </div>
+          <br>
+          <br>
+          <div class="right-side">
+          
+            <div>
+              <h2>Lektuvas</h2>
+             <br>
+             <h3>Lektuvo kodas: ${LektuvoKodas}</h3>
+             <h3>Modelis: ${Modelis}</h3>
+             <h3>Dabartinė lektuvo lokacija: ${KodasIATA}  ${Miestas},${Valstybe}</h3>
+             <h3>Kiek lektuvas gali nuskristi nesipildęs kuro: ${SkrydzioAtstumas} km</h3>
+             <h3>Lektuvo dabartinis statusas: ${Statusas}</h3>
+           </div>
+            <br>
+            <br>
+            <div>
+             <h2>Reisas</h2>
+              <br>
+              <h3>Reiso numeris: ${ReisoNumeris}</h3>
+              <h3>Išvykimo oro uostas: ${iKodasIATA}     ${iMiestas},${iValstybe}</h3>
+              <h3>Išvykimo laikas: ${IsvykimoLaikas.slice(0, 5)}</h3>
+              <h3>Atvykimo oro uostas: ${aKodasIATA}     ${aMiestas},${aValstybe}</h3>
+              <h3>Atvykimo laikas: ${AtvykimoLaikas.slice(0, 5)}</h3>
+              <h3>Kelionės trukmė: ${Trukme} min</h3>
+            </div>
+
+          </div>
+          
+          `;
+          dataBox.innerHTML = html;
+        } else {
+          // Request failed
+          console.error("Error: " + xhr.status);
+        }
       };
-      xhr.send("id=" + id + "&table=" + tableName);
-    })
+      xhr.send(JSON.stringify(data));
+    }
+  });
+
+  const detailedViewOuterBox = document.querySelector(
+    ".perziureti-daugiau__box--outer"
   );
+  detailedViewOuterBox.addEventListener("click", (e) => {
+    const target = e.target;
+    if (
+      target.classList.contains("perziureti-daugiau__box--outer") ||
+      target.classList.contains("perziureti-daugiau__box--close")
+    ) {
+      detailedViewOuterBox.style.opacity = 0;
+      detailedViewOuterBox.style.zIndex = -50;
+    }
+  });
 });
