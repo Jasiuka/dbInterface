@@ -6,6 +6,7 @@ It has features:
   + Delete records
   + Edit record
   + Search records
+
 Technologies used in this project:
   + PHP
   + JavaScript
